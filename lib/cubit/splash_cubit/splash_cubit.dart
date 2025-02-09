@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:robquiz/cubit/splash_cubit/splash_state.dart';
+import 'package:robquiz/model/network/category_model.dart';
 import 'package:robquiz/screens/bottom_nav/bottom_nav.dart';
 import 'package:robquiz/shared/customs/nav_and_finish.dart';
 import '../../shared/network/local/cache_helper.dart';
@@ -29,7 +30,7 @@ class AppCubitSplash extends Cubit<AppStatesSplash> {
         timer.cancel();
         navigateAndFinish(
           context,
-          const BottomNavigationBarScreen(),
+          BottomNavigationBarScreen(),
         );
 
       }

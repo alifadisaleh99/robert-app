@@ -8,7 +8,8 @@ class AppImageAsset {
   // Splash & OnBoarding
   static const String app = "$rootImages/app.png";
 
-  // static const String splashIcon = "$rootSvg/splashIcon.svg";
+  static const String filtterIcon = "$rootImages/filtterIcon.png";
 
+  static const String emptyIcon = "$rootImages/emptyIcon.png";
 
 }

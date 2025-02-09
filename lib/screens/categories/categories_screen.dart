@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:robquiz/cubit/bottom_nav_cubit.dart/bottom_nav_cubit.dart';
 import 'package:robquiz/cubit/category/cubit.dart';
 import 'package:robquiz/cubit/category/state.dart';
 import 'package:robquiz/generated/l10n.dart';
@@ -24,7 +25,9 @@ class CategoriesScreen extends StatelessWidget {
               listener: (BuildContext context, CategoryState state) {},
               builder: (BuildContext context, CategoryState state) {
                 CategoryCubit cubit = CategoryCubit.get(context);
-              return SingleChildScrollView(
+                BottomNavCubit bottomNavCubit = BottomNavCubit.get(context);
+
+                return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -59,16 +62,22 @@ class CategoriesScreen extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) {
 
-                            return BestSellingCard(
+                            return GestureDetector(
+                              onTap: (){
+                                bottomNavCubit.changeIndex(1,"", cubit.categoryModel.data?[index]);
 
-                                goToDetails: () {
-                                },
+                              },
+                              child: BestSellingCard(
 
-                                image: "${Config.storageImage}/${cubit.categoryModel.data?[index].image}",
+                                  // goToDetails: () {
+                                  // },
 
-                                price:"",
+                                  image: "${Config.storageImage}/${cubit.categoryModel.data?[index].image}",
 
-                                productName:"${cubit.categoryModel.data?[index].name}"
+                                  price:"",
+
+                                  productName:"${cubit.categoryModel.data?[index].name}"
+                              ),
                             );
                           },
                         ),

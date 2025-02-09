@@ -80,13 +80,14 @@ class HomeService {
     }
   }
 
-  Future<Either<String, MostPopularModel>> getTests() async {
+  Future<Either<String, MostPopularModel>> getTests({String? q , int? categoryId}) async {
     try {
       final response = await DioHelper.getData(
         url: '${Config.baseURL}/quizzes',
-        // query: {
-        //   "device_token":"${CacheHelper.getData(key: 'device_token')}"
-        // }
+        query: {
+          if(q!=null&&q!="")"q":q,
+          if(categoryId!=null&&categoryId!=0)"category_id":categoryId,
+        }
       );
 
       if (response.statusCode == 200) {

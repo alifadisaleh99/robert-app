@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:robquiz/cubit/bottom_nav_cubit.dart/bottom_nav_cubit.dart';
 import 'package:robquiz/cubit/bottom_nav_cubit.dart/state.dart';
 import 'package:robquiz/generated/l10n.dart';
+import 'package:robquiz/model/network/category_model.dart';
 import 'package:robquiz/screens/categories/categories_screen.dart';
 import 'package:robquiz/screens/home/home_screen.dart';
 import 'package:robquiz/screens/tests/tests_screen.dart';
@@ -12,22 +13,22 @@ import 'package:robquiz/shared/customs/custom_text.dart';
 import '../../shared/network/local/cache_helper.dart';
 import '../../shared/styles/color.dart';
 import '../../shared/styles/image_assets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BottomNavigationBarScreen extends StatelessWidget {
   final int? index;
-  const BottomNavigationBarScreen({super.key, this.index=0});
+
+  const BottomNavigationBarScreen({super.key, this.index=0,});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => BottomNavCubit(context,index),
+      create: (BuildContext context) => BottomNavCubit(context,index,),
       child: BlocConsumer<BottomNavCubit, BottomNavStates>(
         listener: (BuildContext context, BottomNavStates state) {},
         builder: (BuildContext context, BottomNavStates state) {
+
           BottomNavCubit cubit = BottomNavCubit.get(context);
-
-
-
           List<BottomNavigationBarItem> bottomItems = [
             BottomNavigationBarItem(
               icon:  cubit.currentIndex == 0 ? Icon(
@@ -71,14 +72,13 @@ class BottomNavigationBarScreen extends StatelessWidget {
           ];
           List<Widget> screens = [
             const HomeScreen(),
-             const TestsScreen(),
+            TestsScreen(categoryData: cubit.categoryData ?? CategoryData(),q: cubit.q,),
             const CategoriesScreen(),
-
           ];
           return WillPopScope(
             onWillPop: () async {
               if (cubit.currentIndex != 0) {
-                cubit.changeIndex(0);
+                cubit.changeIndex(0,"",null);
                 return false;
               } else {
                 DateTime now = DateTime.now();
@@ -103,8 +103,12 @@ class BottomNavigationBarScreen extends StatelessWidget {
             },
             child: Scaffold(
               floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  print("FAB Pressed!");
+                onPressed: () async {
+                  final Uri uri = Uri.parse('https://dashboard.robquiz.com/create_survey');
+
+                  await launchUrl(uri, mode: LaunchMode.externalApplication);
+
+
                 },
                 backgroundColor: Colors.white,
                 child: Icon(
@@ -156,6 +160,8 @@ class BottomNavigationBarScreen extends StatelessWidget {
                   onTap: (index) {
                     cubit.changeIndex(
                       index,
+                      "",
+                        null
                     );
                   },
                   items: bottomItems,

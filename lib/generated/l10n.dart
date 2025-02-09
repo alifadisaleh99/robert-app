@@ -159,6 +159,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Filter`
+  String get Filter {
+    return Intl.message(
+      'Filter',
+      name: 'Filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get All {
+    return Intl.message(
+      'All',
+      name: 'All',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get Apply {
+    return Intl.message(
+      'Apply',
+      name: 'Apply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset`
+  String get Reset {
+    return Intl.message(
+      'Reset',
+      name: 'Reset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No tests found`
+  String get Notestsfound {
+    return Intl.message(
+      'No tests found',
+      name: 'Notestsfound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sorry, no tests match the filter criteria you applied.`
+  String get Sorrynotestsmatchthefiltercriteriayouapplied {
+    return Intl.message(
+      'Sorry, no tests match the filter criteria you applied.',
+      name: 'Sorrynotestsmatchthefiltercriteriayouapplied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Similar tests`
+  String get Similartests {
+    return Intl.message(
+      'Similar tests',
+      name: 'Similartests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stop Test`
+  String get StopTest {
+    return Intl.message(
+      'Stop Test',
+      name: 'StopTest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start Test`
+  String get StartTest {
+    return Intl.message(
+      'Start Test',
+      name: 'StartTest',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

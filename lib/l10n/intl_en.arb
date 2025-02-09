@@ -9,7 +9,17 @@
 "Mostpopulartests":"Most popular tests",
 "Randomtests":"Random tests",
 "Testtypes" : "Test types",
-"Alltests":"All tests"
+"Alltests":"All tests",
+"Filter":"Filter",
+"All":"All",
+"Apply":"Apply",
+"Reset":"Reset",
+"Notestsfound":"No tests found",
+"Sorrynotestsmatchthefiltercriteriayouapplied":"Sorry, no tests match the filter criteria you applied.",
+"Similartests" : "Similar tests",
+"StopTest":"Stop Test",
+"StartTest":"Start Test"
+
 
 
 }

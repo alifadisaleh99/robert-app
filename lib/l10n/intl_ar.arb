@@ -9,7 +9,18 @@
 "Mostpopulartests":"أشهر الاختبارات",
 "Randomtests": "اختبارات عشوائية",
 "Testtypes":"أصناف الاختبارات",
-"Alltests":"كل الاختبارات"
+"Alltests":"كل الاختبارات",
+"Filter":"فلتر",
+"All":"الكل",
+ "Apply":"تاكيد",
+ "Reset":"إعادة ضبط",
+ "Notestsfound":"لم يتم العثور على اختبارات",
+ "Sorrynotestsmatchthefiltercriteriayouapplied":"عذراً، لا توجد اختبارات تطابق معايير التصفية التي قمت بتطبيقها.",
+ "Similartests" : "الاختبارت المشابهة",
+ "StopTest":"توقف الاختبار",
+ "StartTest":"بدء الاختبار"
+
+
 
 
 

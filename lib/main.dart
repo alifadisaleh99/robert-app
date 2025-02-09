@@ -30,7 +30,6 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LocaleCubit>(create: (BuildContext context) => LocaleCubit()),
-
       ],
       child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
         builder: (context, state) {

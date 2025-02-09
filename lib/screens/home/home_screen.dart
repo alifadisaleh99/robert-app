@@ -1,3 +1,4 @@
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,11 +6,13 @@ import 'package:robquiz/cubit/bottom_nav_cubit.dart/bottom_nav_cubit.dart';
 import 'package:robquiz/cubit/home/cubit.dart';
 import 'package:robquiz/cubit/home/state.dart';
 import 'package:robquiz/generated/l10n.dart';
+import 'package:robquiz/model/network/most_popluar_model.dart';
 import 'package:robquiz/model/network/slider_model.dart';
 import 'package:robquiz/screens/home/widget/best_selling_card.dart';
 import 'package:robquiz/screens/home/widget/custom_search_feild.dart';
 import 'package:robquiz/screens/home/widget/custom_slider.dart';
 import 'package:robquiz/screens/home/widget/row_see_all.dart';
+import 'package:robquiz/screens/test_details/test_details_screen.dart';
 import 'package:robquiz/shared/customs/loading_top.dart';
 import 'package:robquiz/shared/network/local/cache_helper.dart';
 import 'package:robquiz/shared/network/remote/base_url.dart';
@@ -40,11 +43,23 @@ class HomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: CustomSearchFeild(
                           controller: cubit.controllerSearch,
-                          onPressedIcon: (){
+                          onPressedIcon: () {
+                            bottomNavCubit.changeIndex(1, cubit.controllerSearch?.text ?? "",null).then((_) {
+                              cubit.controllerSearch?.text = ""; // Clear the search text after index change
+                            });
                           },
-                          onChanged: (value){
-                          },
+                          onChanged: (value) {
+                            EasyDebounce.debounce(
+                              'EasyDebounce.debounce',
+                              Duration(milliseconds: 2000),
+                                  () {
+                                    bottomNavCubit.changeIndex(1, cubit.controllerSearch?.text ?? "",null).then((_) {
+                                      cubit.controllerSearch?.text = ""; // Clear the search text after index change
+                                    });
+                              },
+                            );
 
+                          },
                         ),
                       ),
                       SizedBox(
@@ -89,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                             RowSeeAll(
                                 title: "${S.of(context).LatestTests}",
                                 onTap  :(){
-                                  bottomNavCubit.changeIndex(1);
+                                  bottomNavCubit.changeIndex(1, cubit.controllerSearch?.text ?? "",null);
                                 }
 
                             ),
@@ -110,7 +125,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       BestSellingCard(
 
-                                        goToDetails: () {
+                                        goToDetails:  (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => TestDetailsScreen(test: cubit.newestModel.data?[index] ?? MostPopularData() ,),
+                                            ),
+                                          );
                                         },
 
                                         image: "${Config.storageImage}/${cubit.newestModel.data?[index].image}",
@@ -151,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                             RowSeeAll(
                                 title: "${S.of(context).Mostpopulartests}",
                                 onTap  :(){
-                                  bottomNavCubit.changeIndex(1);
+                                  bottomNavCubit.changeIndex(1, cubit.controllerSearch?.text ?? "",null);
                                 }
 
                             ),
@@ -172,7 +193,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       BestSellingCard(
 
-                                          goToDetails: () {
+                                          goToDetails:  (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => TestDetailsScreen(test: cubit.mostPopularModel.data?[index] ?? MostPopularData() ,),
+                                              ),
+                                            );
                                           },
 
                                           image: "${Config.storageImage}/${cubit.mostPopularModel.data?[index].image}",
@@ -192,7 +219,7 @@ class HomeScreen extends StatelessWidget {
                             RowSeeAll(
                                 title: "${S.of(context).Randomtests}",
                                 onTap  :(){
-                                  bottomNavCubit.changeIndex(1);
+                                  bottomNavCubit.changeIndex(1, cubit.controllerSearch?.text ?? "",null);
                                 }
 
                             ),
@@ -213,7 +240,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       BestSellingCard(
 
-                                          goToDetails: () {
+                                          goToDetails:  (){
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => TestDetailsScreen(test: cubit.featuredModel.data?[index] ?? MostPopularData() ,),
+                                              ),
+                                            );
                                           },
 
                                           image: "${Config.storageImage}/${cubit.featuredModel.data?[index].image}",
@@ -233,7 +266,7 @@ class HomeScreen extends StatelessWidget {
                             RowSeeAll(
                                 title: "${S.of(context).Categories}",
                                 onTap  :(){
-                                  bottomNavCubit.changeIndex(2);
+                                  bottomNavCubit.changeIndex(2, cubit.controllerSearch?.text ?? "",null);
                                 }
 
                             ),
@@ -254,7 +287,13 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                       BestSellingCard(
 
-                                          goToDetails: () {
+                                          goToDetails:  (){
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => TestDetailsScreen(test: cubit.categoryModel.data?[index] ?? MostPopularData() ,),
+                                            //   ),
+                                            // );
                                           },
 
                                           image: "${Config.storageImage}/${cubit.categoryModel.data?[index].image}",
