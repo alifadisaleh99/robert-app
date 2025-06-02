@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../../styles/color.dart';
 import '../../styles/image_assets.dart';
 import '../local/cache_helper.dart';

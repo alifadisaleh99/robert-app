@@ -140,9 +140,10 @@ class Question {
   int? id;
   int? surveyId;
   dynamic sectionId;
-  String? content;
+  // String? content;
+  List<String>? content;
   dynamic image;
-  dynamic secondImage;
+  String? secondImage;
   String? type;
   List<String>? arOptions;
   List<String>? answers;
@@ -177,7 +178,10 @@ class Question {
     id: json["id"],
     surveyId: json["survey_id"],
     sectionId: json["section_id"],
-    content: json["content"],
+    content:
+    json["content"] == null ? [] : json["content"].runtimeType == String?[json["content"]]:List<String>.from(json["content"]!.map((x) => x)),
+    // json["content"],
+
     image: json["image"],
     secondImage: json["second_image"],
     type: json["type"],
@@ -194,7 +198,8 @@ class Question {
     "id": id,
     "survey_id": surveyId,
     "section_id": sectionId,
-    "content": content,
+    "content": content == null ? [] : List<dynamic>.from(content!.map((x) => x)),
+
     "image": image,
     "second_image": secondImage,
     "type": type,

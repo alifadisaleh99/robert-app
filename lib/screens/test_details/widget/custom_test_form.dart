@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:robquiz/model/network/test_details_chooses_time.dart';
+import 'package:robquiz/shared/network/remote/base_url.dart';
 import 'package:robquiz/shared/styles/color.dart';
 
 class QuizOptionSelector extends StatelessWidget {
@@ -7,6 +9,8 @@ class QuizOptionSelector extends StatelessWidget {
   final void Function(int index)? onAnswerSelected;
   final List<String> option;
   final bool isSelected;
+
+
   final bool isSelectedCorrect;
   final Color colorText;
   final Color colorAnswer;
@@ -59,7 +63,6 @@ class QuizOptionSelector extends StatelessWidget {
         return AppColor.blackColor;
       }
     });
-
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
@@ -78,7 +81,7 @@ class QuizOptionSelector extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "${indexQ+1}- ${question.content}:" ?? '',
+            "${indexQ+1}- ${(question.content?.length!=0&&question.content?.length!=null)?(question.content?[0]):""}" ?? '',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -88,6 +91,23 @@ class QuizOptionSelector extends StatelessWidget {
             textDirection: TextDirection.rtl,
           ),
           const SizedBox(height: 10),
+          if(question.image!=""&&question.image!=null)
+          CachedNetworkImage(
+            placeholder: (context, url) => Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(
+                  color: AppColor.primary1Color,
+                  strokeWidth: 2,
+                ),
+              ),
+            ),
+            errorWidget: (context, url, error) => const Icon(Icons.error, color: Colors.red),
+            imageUrl: "${Config.storageImage}/${question.image}",
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+          ),
           if (question.arOptions != null)
             ListView.builder(
               shrinkWrap: true,
@@ -128,6 +148,8 @@ class QuizOptionSelector extends StatelessWidget {
                 );
               },
             ),
+
+
         ],
       ),
     );

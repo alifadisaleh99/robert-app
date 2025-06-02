@@ -80,11 +80,12 @@ class HomeService {
     }
   }
 
-  Future<Either<String, MostPopularModel>> getTests({String? q , int? categoryId}) async {
+  Future<Either<String, MostPopularModel>> getTests({String? q , int? categoryId,String? page}) async {
     try {
       final response = await DioHelper.getData(
-        url: '${Config.baseURL}/quizzes',
+        url:'${Config.baseURL}/quizzes',
         query: {
+          if(page!=null&&page!="")"page":page,
           if(q!=null&&q!="")"q":q,
           if(categoryId!=null&&categoryId!=0)"category_id":categoryId,
         }

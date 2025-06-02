@@ -52,7 +52,7 @@ class CategoriesScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
-                          itemCount: 10 ?? 0,
+                          itemCount: cubit.categoryModel.data?.length ?? 0,
                           gridDelegate:
                           SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,

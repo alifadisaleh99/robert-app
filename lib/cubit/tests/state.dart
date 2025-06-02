@@ -18,3 +18,8 @@ class CategoriesGetSuccessState extends TestsState {}
 
 class ToggleBrandSelectionState extends TestsState {}
 class ToggleSelectAllState extends TestsState {}
+
+
+class TestMoreLoadingState extends TestsState {}
+class TestMoreErrorState extends TestsState {}
+class TestMoreSuccessState extends TestsState {}

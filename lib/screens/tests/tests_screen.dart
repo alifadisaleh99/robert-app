@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +8,7 @@ import 'package:robquiz/cubit/tests/cubit.dart';
 import 'package:robquiz/cubit/tests/state.dart';
 import 'package:robquiz/generated/l10n.dart';
 import 'package:robquiz/model/network/category_model.dart';
+import 'package:robquiz/model/network/most_popluar_model.dart';
 import 'package:robquiz/screens/home/widget/best_selling_card.dart';
 import 'package:robquiz/screens/tests/filtter_screen.dart';
 import 'package:robquiz/shared/customs/custom_text.dart';
@@ -16,6 +18,8 @@ import 'package:robquiz/shared/network/remote/base_url.dart';
 import 'package:robquiz/shared/styles/color.dart';
 import 'package:robquiz/shared/styles/image_assets.dart';
 
+import '../test_details/test_details_screen.dart';
+
 class TestsScreen extends StatelessWidget {
   final CategoryData categoryData;
   final String? q ;
@@ -24,6 +28,7 @@ class TestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
       child: BlocProvider(
         create: (BuildContext context) => TestsCubit(categoryData,q),
         child: BlocConsumer<TestsCubit, TestsState>(
@@ -32,6 +37,7 @@ class TestsScreen extends StatelessWidget {
               TestsCubit cubit = TestsCubit.get(context);
             return Scaffold(
               body: SingleChildScrollView(
+                controller: cubit.scrollController,
                 child: LoadingManager(
                   isLoading: cubit.isLoadingTests,
                   child: Column(
@@ -100,6 +106,12 @@ class TestsScreen extends StatelessWidget {
                               return BestSellingCard(
 
                                   goToDetails: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => TestDetailsScreen(test: cubit.testsModel.data?[index] ?? MostPopularData() ,),
+                                      ),
+                                    );
                                   },
 
                                   image: "${Config.storageImage}/${cubit.testsModel.data?[index].image}",
@@ -112,11 +124,24 @@ class TestsScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      if(cubit.isLoadMoreRunning)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10.0),
+                          child: Center(
+                            child: CupertinoActivityIndicator(
+                              radius: 30,
+                              color: AppColor.blueColor,
+                            ),
+                          ),
+                        ),
+
                       if(cubit.testsModel.data?.length==null||cubit.testsModel.data?.length==0)
                         EmptyContainer(
                           titleEmpty: S.of(context).Notestsfound,
                           bodyEmpty: S.of(context).Sorrynotestsmatchthefiltercriteriayouapplied,
                         ),
+
+
                       SizedBox(height: 50,),
 
                     ],

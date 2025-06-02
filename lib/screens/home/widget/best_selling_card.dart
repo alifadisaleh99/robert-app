@@ -27,14 +27,14 @@ class BestSellingCard extends StatelessWidget {
 
       child: Container(
         width: 200.h,
-        height: 300.h,
+        height: 250.h,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
           image: DecorationImage(image: CachedNetworkImageProvider(
               image,
           ),
-          fit: BoxFit.cover
+          fit: BoxFit.cover,
           ),
           border: Border.all(color: AppColor.borderInput, width: 1),
           boxShadow: [

@@ -15,6 +15,7 @@ class SliderSuccessState extends TestsDetailsState {}
 class CategoriesGetLoadingState extends TestsDetailsState {}
 class CategoriesGetErrorState extends TestsDetailsState {}
 class CategoriesGetSuccessState extends TestsDetailsState {}
+class LikeGetSuccessState extends TestsDetailsState {}
 
 class ToggleBrandSelectionState extends TestsDetailsState {}
 class ToggleAddQuestionToList extends TestsDetailsState {}

@@ -103,6 +103,8 @@ class BottomNavigationBarScreen extends StatelessWidget {
             },
             child: Scaffold(
               floatingActionButton: FloatingActionButton(
+                          heroTag: "1111",
+                // heroTag: null,
                 onPressed: () async {
                   final Uri uri = Uri.parse('https://dashboard.robquiz.com/create_survey');
 

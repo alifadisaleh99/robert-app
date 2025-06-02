@@ -288,6 +288,8 @@ class HomeScreen extends StatelessWidget {
                                       BestSellingCard(
 
                                           goToDetails:  (){
+                                            bottomNavCubit.changeIndex(1,"", cubit.categoryModel.data?[index]);
+
                                             // Navigator.push(
                                             //   context,
                                             //   MaterialPageRoute(

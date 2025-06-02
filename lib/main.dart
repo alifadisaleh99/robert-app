@@ -3,7 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:robquiz/cubit/bloc_observer.dart';
+import 'package:robquiz/cubit/bottom_nav_cubit.dart/bottom_nav_cubit.dart';
+import 'package:robquiz/cubit/test_details/cubit.dart';
 import 'package:robquiz/generated/l10n.dart';
+import 'package:robquiz/model/network/most_popluar_model.dart';
+import 'package:robquiz/screens/bottom_nav/bottom_nav.dart';
 import 'package:robquiz/screens/splash/splash.dart';
 import 'package:robquiz/shared/locale/locale_cubit.dart';
 import 'package:robquiz/shared/network/local/cache_helper.dart';
@@ -14,6 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
+
   runApp(MyApp());
 }
 class MyApp extends StatefulWidget {
@@ -30,6 +35,8 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LocaleCubit>(create: (BuildContext context) => LocaleCubit()),
+        BlocProvider<BottomNavCubit>(create: (BuildContext context) => BottomNavCubit(context,0)),
+        BlocProvider<TestsDetailsCubit>(create: (BuildContext context) => TestsDetailsCubit(MostPopularData())),
       ],
       child: BlocBuilder<LocaleCubit, ChangeLocaleState>(
         builder: (context, state) {

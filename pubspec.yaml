@@ -59,6 +59,8 @@ dependencies:
   flutter_widget_from_html: ^0.15.2
   easy_debounce: ^2.0.3
   percent_indicator: ^4.2.4
+#  wakelock_plus: ^1.2.11
+  webview_flutter_android: ^3.10.0
 
 dev_dependencies:
   flutter_test:
